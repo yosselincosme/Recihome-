@@ -58,7 +58,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
-    styles={"container": {"max-width": "100%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
+    styles={"container": {"max-width": "300%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
 )
 
 # Mostrar contenido según la opción seleccionada
