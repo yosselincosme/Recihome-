@@ -5,7 +5,7 @@ from colores import inyectar_estilos
 # Función para la página principal
 def pagina_principal():
     # Inyectar los estilos CSS personalizados
-    st.markdown(estilos_css, unsafe_allow_html=True)
+    st.markdown(inyectar_estilos, unsafe_allow_html=True)
 
     st.title("Recihome")
     st.write("Una app centrada en la visualización, recolección y reciclaje de residuos en el hogar, "
