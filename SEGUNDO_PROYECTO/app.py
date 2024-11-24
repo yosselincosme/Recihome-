@@ -17,19 +17,27 @@ archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 st.markdown("""
     <style>
         .css-1d391kg {  # Esta clase es para los íconos del menú
-            font-size: 14px !important;  # Reducir el tamaño de los íconos
+            font-size: 12px !important;  # Reducir el tamaño de los íconos
         }
         .css-1v0mbdj {  # Esta clase es para el texto de los íconos
-            font-size: 12px !important;  # Reducir el tamaño del texto
+            font-size: 10px !important;  # Reducir el tamaño del texto
         }
         .css-1d391kg, .css-1v0mbdj {
-            padding: 8px 15px;  # Reducir el espacio alrededor de los íconos
+            padding: 10px 20px;  # Rediseñar el espaciado alrededor de los íconos
         }
-        .stMenu {  # Clase general para ajustar el menú
-            font-size: 12px !important;
-            padding: 8px 15px;  # Espaciado para que sea más largo horizontalmente
+        .stMenu {  # Clase general para el menú
+            font-size: 10px !important;  # Hacer la fuente del menú más pequeña
+            padding: 10px 20px;  # Espaciado para que sea más largo horizontalmente
             display: flex;
             justify-content: center;
+            background-color: #1C3A3E;  # Color de fondo del menú
+        }
+        .stMenu a {
+            color: #FFFFFF;  # Texto blanco
+            transition: background-color 0.3s ease;
+        }
+        .stMenu a:hover {
+            background-color: #E57B29;  # Color de fondo del texto cuando se pasa el ratón
         }
     </style>
 """, unsafe_allow_html=True)
@@ -88,7 +96,7 @@ elif selected == "Análisis por Departamento":
         color_discrete_sequence=colores['grafico']  # Usar los colores desde el archivo de configuración
     )
 
-    # Configuración de la fuente en el gráfico (eliminando la fuente personalizada)
+    # Configuración del gráfico
     fig.update_layout(
         title_font=dict(size=24, color=colores['encabezado']),  # Usar la fuente predeterminada
         xaxis_title_font=dict(size=18, color=colores['encabezado']),
@@ -98,4 +106,5 @@ elif selected == "Análisis por Departamento":
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
 
