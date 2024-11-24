@@ -11,7 +11,6 @@ archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 
 # Crear el menú horizontal
 selected = option_menu(
-    menu_title="Menú Principal",  # Título del menú
     options=["Página principal", "Distribución general", "Mapa", "Resumen", "Análisis por Departamento"],  # Nueva opción
     icons=["house", "bar-chart", "map", "clipboard", "filter"],  # Ícono para la nueva opción
     menu_icon="cast",  # Ícono general del menú
