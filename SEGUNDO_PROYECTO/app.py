@@ -17,16 +17,19 @@ archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 st.markdown("""
     <style>
         .css-1d391kg {  # Esta clase es para los íconos del menú
-            font-size: 16px !important;  # Reducir el tamaño de los íconos
+            font-size: 14px !important;  # Reducir el tamaño de los íconos
         }
         .css-1v0mbdj {  # Esta clase es para el texto de los íconos
-            font-size: 14px !important;  # Reducir el tamaño del texto
+            font-size: 12px !important;  # Reducir el tamaño del texto
         }
         .css-1d391kg, .css-1v0mbdj {
-            padding: 5px 10px;  # Reducir el espacio alrededor de los íconos
+            padding: 8px 15px;  # Reducir el espacio alrededor de los íconos
         }
         .stMenu {  # Clase general para ajustar el menú
-            font-size: 14px !important;
+            font-size: 12px !important;
+            padding: 8px 15px;  # Espaciado para que sea más largo horizontalmente
+            display: flex;
+            justify-content: center;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -39,7 +42,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
-    styles={"container": {"max-width": "1200px", "padding": "5px 0"}},  # Ajustar el tamaño del contenedor
+    styles={"container": {"max-width": "1500px", "padding": "10px 0"}},  # Ajustar el tamaño del contenedor para que sea más largo
 )
 
 # Mostrar contenido según la opción seleccionada
@@ -95,5 +98,4 @@ elif selected == "Análisis por Departamento":
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
-
 
