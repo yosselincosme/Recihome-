@@ -6,7 +6,7 @@ from pag_principal import pagina_principal
 from distribucion_general import distribucion_general
 
 # Cargar el archivo CSV
-archivo_cargado = pd.read_csv(r"C:\Users\Yosselin\Desktop\SEGUNDO_PROYECTO\residuos.csv", sep=';', encoding='latin1')
+archivo_cargado = pd.read_csv("residuos.csv", sep=';', encoding='latin1')
 
 # Crear el menú horizontal
 selected = option_menu(
