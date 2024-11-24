@@ -31,7 +31,7 @@ st.markdown("""
             display: flex;
             justify-content: center;
             background-color: #16423C;  # Color de fondo del menú
-            width: 300%;  # Asegurarse de que el menú abarque toda la página
+            width: 100%;  # Asegurarse de que el menú abarque toda la página
             position: fixed;  # Fijar el menú en la parte superior
             top: 0;
             left: 0;
@@ -58,7 +58,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
-    styles={"container": {"max-width": "300%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
+    styles={"container": {"max-width": "100%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
 )
 
 # Mostrar contenido según la opción seleccionada
@@ -114,6 +114,3 @@ elif selected == "Análisis por Departamento":
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
-
-
-
