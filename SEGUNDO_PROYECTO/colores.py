@@ -1,14 +1,4 @@
-# Colores personalizados para la aplicación
-colores = {
-    'fondo_principal': '#16423C',  # Verde oscuro
-    'fondo_sidebar': '#C4DAD2',    # Verde claro
-    'encabezado': '#FFFFFF',       # Blanco
-    'boton': '#6A9C89',            # Verde medio
-    'texto_general': '#FFFFFF',    # Blanco
-    'grafico': ['#16423C', '#6A9C89', '#C4DAD2', '#E9EFEC']  # Colores para gráficos
-}
-
-# Función para inyectar los estilos CSS personalizados
+# Función para inyectar los estilos CSS personalizados con círculos blancos en el fondo
 def inyectar_estilos():
     return f"""
     <style>
@@ -18,9 +8,13 @@ def inyectar_estilos():
         src: url('custom_font.ttf') format('truetype');
     }}
     
-    /* Fondo principal */
+    /* Fondo principal con círculos blancos */
     .stApp {{
         background-color: {colores['fondo_principal']};
+        background-image: radial-gradient(circle, #ffffff 20%, transparent 20%);
+        background-size: 100px 100px;  /* Tamaño de los círculos */
+        background-position: 0 0, 50px 50px;  /* Posicionar los círculos */
+        background-repeat: repeat;
     }}
     
     /* Fondo del sidebar */
