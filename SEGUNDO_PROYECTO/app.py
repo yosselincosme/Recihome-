@@ -13,6 +13,24 @@ st.markdown(inyectar_estilos(), unsafe_allow_html=True)
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
 archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 
+# Inyectar estilo CSS personalizado para el menú
+st.markdown("""
+    <style>
+        .css-1d391kg {  # Esta clase es para los íconos del menú
+            font-size: 16px !important;  # Reducir el tamaño de los íconos
+        }
+        .css-1v0mbdj {  # Esta clase es para el texto de los íconos
+            font-size: 14px !important;  # Reducir el tamaño del texto
+        }
+        .css-1d391kg, .css-1v0mbdj {
+            padding: 5px 10px;  # Reducir el espacio alrededor de los íconos
+        }
+        .stMenu {  # Clase general para ajustar el menú
+            font-size: 14px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Crear el menú horizontal
 selected = option_menu(
     menu_title=None,
@@ -21,6 +39,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
+    styles={"container": {"max-width": "1200px", "padding": "5px 0"}},  # Ajustar el tamaño del contenedor
 )
 
 # Mostrar contenido según la opción seleccionada
@@ -66,14 +85,15 @@ elif selected == "Análisis por Departamento":
         color_discrete_sequence=colores['grafico']  # Usar los colores desde el archivo de configuración
     )
 
-    # Configuración de la fuente en el gráfico
+    # Configuración de la fuente en el gráfico (eliminando la fuente personalizada)
     fig.update_layout(
-        title_font=dict(family="Voltaire", size=24, color=colores['encabezado']),  # Cambié la fuente para evitar conflictos con PIL
-        xaxis_title_font=dict(family="Voltaire", size=18, color=colores['encabezado']),
-        yaxis_title_font=dict(family="Voltaire", size=18, color=colores['encabezado']),
-        font=dict(family="Voltaire", size=14, color=colores['texto_general'])
+        title_font=dict(size=24, color=colores['encabezado']),  # Usar la fuente predeterminada
+        xaxis_title_font=dict(size=18, color=colores['encabezado']),
+        yaxis_title_font=dict(size=18, color=colores['encabezado']),
+        font=dict(size=14, color=colores['texto_general'])  # Fuente predeterminada para el cuerpo
     )
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
 
