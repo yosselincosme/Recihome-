@@ -3,5 +3,4 @@ streamlit
 pandas
 numpy
 streamlit-option-menu
-geopandas
-fiona shapely
+fiona 
