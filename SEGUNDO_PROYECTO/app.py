@@ -5,7 +5,6 @@ from streamlit_option_menu import option_menu
 from pag_principal import pagina_principal
 from distribucion_general import distribucion_general
 from colores import colores, inyectar_estilos  # Importar la función para inyectar los estilos
-from PIL import ImageFont  # Usamos PIL para cargar la fuente TrueType
 
 # Inyectar los estilos CSS en la aplicación
 st.markdown(inyectar_estilos(), unsafe_allow_html=True)
@@ -44,6 +43,7 @@ elif selected == "Resumen":
 elif selected == "Análisis por Departamento":
     st.title("Análisis de Residuos por Departamento")
     
+    # Filtros de selección en la barra lateral
     with st.sidebar:
         st.header("Filtros para el análisis por departamento")
         departamento = st.selectbox(
@@ -51,6 +51,7 @@ elif selected == "Análisis por Departamento":
             archivo_cargado['DEPARTAMENTO'].unique()
         )
     
+    # Filtrado de datos
     datos_filtrados = archivo_cargado[archivo_cargado['DEPARTAMENTO'] == departamento]
     columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
     datos_agrupados = datos_filtrados.groupby('DEPARTAMENTO')[columnas_residuos].sum().reset_index()
@@ -67,13 +68,11 @@ elif selected == "Análisis por Departamento":
 
     # Configuración de la fuente en el gráfico
     fig.update_layout(
-        title_font=dict(family="Voltaire-Frangela", size=24, color=colores['encabezado']),
-        xaxis_title_font=dict(family="Voltaire-Frangela", size=18, color=colores['encabezado']),
-        yaxis_title_font=dict(family="Voltaire-Frangela", size=18, color=colores['encabezado']),
-        font=dict(family="Voltaire-Frangela", size=14, color=colores['texto_general'])
+        title_font=dict(family="Voltaire", size=24, color=colores['encabezado']),  # Cambié la fuente para evitar conflictos con PIL
+        xaxis_title_font=dict(family="Voltaire", size=18, color=colores['encabezado']),
+        yaxis_title_font=dict(family="Voltaire", size=18, color=colores['encabezado']),
+        font=dict(family="Voltaire", size=14, color=colores['texto_general'])
     )
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
-
-
