@@ -15,7 +15,7 @@ url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_
 archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 
 # Subir y cargar la fuente .ttf
-font_path = "custom_font.ttf"  # Reemplaza con la ruta correcta de tu archivo de fuente .ttf
+font_path = "SEGUNDO_PROYECTO/Voltaire-Frangela.ttf"  # Reemplaza con la ruta correcta de tu archivo de fuente .ttf
 
 # Crear el menú horizontal
 selected = option_menu(
