@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from colores import colores
+
 
 
 def pagina_principal():
