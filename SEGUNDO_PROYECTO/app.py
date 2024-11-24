@@ -6,8 +6,7 @@ from pag_principal import pagina_principal
 from distribucion_general import distribucion_general
 from colores import colores  # Importar la función para inyectar los estilos
 
-# Inyectar los estilos CSS en la aplicación
-st.markdown(inyectar_estilos(), unsafe_allow_html=True)
+
 
 # Cargar el archivo CSV
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
