@@ -30,7 +30,7 @@ st.markdown("""
             padding: 10px 20px;  # Espaciado para que sea más largo horizontalmente
             display: flex;
             justify-content: center;
-            background-color: #1C3A3E;  # Color de fondo del menú
+            background-color: #16423C;  # Color de fondo del menú
             width: 300%;  # Asegurarse de que el menú abarque toda la página
             position: fixed;  # Fijar el menú en la parte superior
             top: 0;
