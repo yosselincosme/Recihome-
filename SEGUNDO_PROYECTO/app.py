@@ -4,41 +4,10 @@ import plotly.express as px
 from streamlit_option_menu import option_menu
 from pag_principal import pagina_principal
 from distribucion_general import distribucion_general
+from colores import colores, inyectar_estilos  # Importar la función para inyectar los estilos
 
-# Inyectar estilos CSS personalizados
-st.markdown(
-    """
-    <style>
-    /* Fondo principal */
-    .stApp {
-        background-color: #E9EFEC;
-    }
-    
-    /* Fondo del sidebar */
-    [data-testid="stSidebar"] {
-        background-color: #C4DAD2;
-    }
-    
-    /* Encabezados */
-    h1, h2, h3, h4 {
-        color: #16423C;
-    }
-    
-    /* Botones y enlaces */
-    .css-1q8dd3e, .css-1aumxhk, .st-cv {
-        background-color: #6A9C89 !important;
-        color: #E9EFEC !important;
-        border: 1px solid #16423C !important;
-    }
-    
-    /* Texto general */
-    .css-16huue1 {
-        color: #16423C !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Inyectar los estilos CSS en la aplicación
+st.markdown(inyectar_estilos(), unsafe_allow_html=True)
 
 # Cargar el archivo CSV
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
@@ -91,7 +60,8 @@ elif selected == "Análisis por Departamento":
         y='Cantidad',
         color='DEPARTAMENTO',
         title=f"Distribución de Residuos por Departamento: {departamento}",
-        color_discrete_sequence=['#16423C', '#6A9C89', '#C4DAD2', '#E9EFEC']
+        color_discrete_sequence=colores['grafico']  # Usar los colores desde el archivo de configuración
     )
 
     st.plotly_chart(fig)
+
