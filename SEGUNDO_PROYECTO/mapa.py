@@ -5,6 +5,9 @@ def mostrar_mapa(archivo_cargado):
     residuos_por_departamento = archivo_cargado.groupby('DEPARTAMENTO').sum().reset_index()
 
     # Cargar el GeoJSON
+    geojson_path ="https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson 
+    with open(geojson_path, 'r', encoding='utf-8') as f:
+    geojson_data = json.load(f)
     geojson_url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson"
     geojson_data = requests.get(geojson_url).json()
 
