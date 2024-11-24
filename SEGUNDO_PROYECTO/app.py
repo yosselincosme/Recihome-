@@ -5,7 +5,7 @@ from streamlit_option_menu import option_menu
 from pag_principal import pagina_principal
 from distribucion_general import distribucion_general
 from colores import colores, inyectar_estilos  # Importar la función para inyectar los estilos
-from PIL import ImageFont  # Usaremos PIL para cargar la fuente TrueType
+from PIL import ImageFont  # Usamos PIL para cargar la fuente TrueType
 
 # Inyectar los estilos CSS en la aplicación
 st.markdown(inyectar_estilos(), unsafe_allow_html=True)
@@ -13,9 +13,6 @@ st.markdown(inyectar_estilos(), unsafe_allow_html=True)
 # Cargar el archivo CSV
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
 archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
-
-# Subir y cargar la fuente .ttf
-font_path = "SEGUNDO_PROYECTO/Voltaire-Frangela.ttf"  # Reemplaza con la ruta correcta de tu archivo de fuente .ttf
 
 # Crear el menú horizontal
 selected = option_menu(
@@ -70,17 +67,13 @@ elif selected == "Análisis por Departamento":
 
     # Configuración de la fuente en el gráfico
     fig.update_layout(
-        title_font=dict(family="custom_font", size=24, color=colores['encabezado']),
-        xaxis_title_font=dict(family="custom_font", size=18, color=colores['encabezado']),
-        yaxis_title_font=dict(family="custom_font", size=18, color=colores['encabezado']),
-        font=dict(family="custom_font", size=14, color=colores['texto_general'])
+        title_font=dict(family="Voltaire-Frangela", size=24, color=colores['encabezado']),
+        xaxis_title_font=dict(family="Voltaire-Frangela", size=18, color=colores['encabezado']),
+        yaxis_title_font=dict(family="Voltaire-Frangela", size=18, color=colores['encabezado']),
+        font=dict(family="Voltaire-Frangela", size=14, color=colores['texto_general'])
     )
 
-    # Cargar la fuente en el gráfico
-    fig.update_layout(
-        font=dict(family="Arial, sans-serif")  # Usa "Arial" si la fuente no está disponible
-    )
-    
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
 
