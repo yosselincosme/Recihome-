@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from colores import estilos_css  # Importar los estilos desde colores.py
+from colores import inyectar_estilos  
 
 # Función para la página principal
 def pagina_principal():
