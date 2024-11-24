@@ -13,43 +13,6 @@ st.markdown(inyectar_estilos(), unsafe_allow_html=True)
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
 archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 
-# Inyectar estilo CSS personalizado para el menú
-st.markdown("""
-    <style>
-        .css-1d391kg {  # Esta clase es para los íconos del menú
-            font-size: 12px !important;  # Reducir el tamaño de los íconos
-        }
-        .css-1v0mbdj {  # Esta clase es para el texto de los íconos
-            font-size: 10px !important;  # Reducir el tamaño del texto
-        }
-        .css-1d391kg, .css-1v0mbdj {
-            padding: 10px 20px;  # Rediseñar el espaciado alrededor de los íconos
-        }
-        .stMenu {  # Clase general para el menú
-            font-size: 10px !important;  # Hacer la fuente del menú más pequeña
-            padding: 10px 20px;  # Espaciado para que sea más largo horizontalmente
-            display: flex;
-            justify-content: center;
-            background-color: #16423C;  # Color de fondo del menú
-            width: 100%;  # Asegurarse de que el menú abarque toda la página
-            position: fixed;  # Fijar el menú en la parte superior
-            top: 0;
-            left: 0;
-            z-index: 1000;  # Asegurarse de que el menú esté sobre otros elementos
-        }
-        .stMenu a {
-            color: #FFFFFF;  # Texto blanco
-            transition: background-color 0.3s ease;
-        }
-        .stMenu a:hover {
-            background-color: #E57B29;  # Color de fondo del texto cuando se pasa el ratón
-        }
-        .main {  # Ajustar el contenido principal para que no quede cubierto por el menú
-            margin-top: 60px;  # Dejar espacio en la parte superior para el menú fijo
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # Crear el menú horizontal
 selected = option_menu(
     menu_title=None,
@@ -58,7 +21,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
-    styles={"container": {"max-width": "100%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
+    styles={"container": {"max-width": "300%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
 )
 
 # Mostrar contenido según la opción seleccionada
