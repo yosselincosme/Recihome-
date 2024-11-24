@@ -31,7 +31,7 @@ st.markdown("""
             display: flex;
             justify-content: center;
             background-color: #1C3A3E;  # Color de fondo del menú
-            width: 100%;  # Asegurarse de que el menú abarque toda la página
+            width: 300%;  # Asegurarse de que el menú abarque toda la página
             position: fixed;  # Fijar el menú en la parte superior
             top: 0;
             left: 0;
