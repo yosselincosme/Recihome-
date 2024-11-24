@@ -31,6 +31,11 @@ st.markdown("""
             display: flex;
             justify-content: center;
             background-color: #1C3A3E;  # Color de fondo del menú
+            width: 100%;  # Asegurarse de que el menú abarque toda la página
+            position: fixed;  # Fijar el menú en la parte superior
+            top: 0;
+            left: 0;
+            z-index: 1000;  # Asegurarse de que el menú esté sobre otros elementos
         }
         .stMenu a {
             color: #FFFFFF;  # Texto blanco
@@ -38,6 +43,9 @@ st.markdown("""
         }
         .stMenu a:hover {
             background-color: #E57B29;  # Color de fondo del texto cuando se pasa el ratón
+        }
+        .main {  # Ajustar el contenido principal para que no quede cubierto por el menú
+            margin-top: 60px;  # Dejar espacio en la parte superior para el menú fijo
         }
     </style>
 """, unsafe_allow_html=True)
@@ -50,7 +58,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
-    styles={"container": {"max-width": "1500px", "padding": "10px 0"}},  # Ajustar el tamaño del contenedor para que sea más largo
+    styles={"container": {"max-width": "100%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
 )
 
 # Mostrar contenido según la opción seleccionada
@@ -106,5 +114,6 @@ elif selected == "Análisis por Departamento":
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
 
 
