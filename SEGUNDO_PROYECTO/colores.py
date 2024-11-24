@@ -54,7 +54,7 @@ def inyectar_estilos():
     }}
     .stMenu {{  # Clase general para el menú
         font-size: 10px !important;  # Hacer la fuente del menú más pequeña
-        padding: 10px 20px;  # Espaciado para que sea más largo horizontalmente
+        padding: 10px 50px;  # Espaciado para que sea más largo horizontalmente
         display: flex;
         justify-content: center;
         background-color: {colores['fondo_principal']};  # Color de fondo del menú
