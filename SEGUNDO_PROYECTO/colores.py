@@ -50,11 +50,11 @@ def inyectar_estilos():
         font-size: 10px !important;  # Reducir el tamaño del texto
     }}
     .css-1d391kg, .css-1v0mbdj {{
-        padding: 10px 20px;  # Rediseñar el espaciado alrededor de los íconos
+        padding: 10px 100px;  # Rediseñar el espaciado alrededor de los íconos
     }}
     .stMenu {{  # Clase general para el menú
-        font-size: 10px !important;  # Hacer la fuente del menú más pequeña
-        padding: 10px 50px;  # Espaciado para que sea más largo horizontalmente
+        font-size: 6px !important;  # Hacer la fuente del menú más pequeña
+        padding: 10px 5000px;  # Espaciado para que sea más largo horizontalmente
         display: flex;
         justify-content: center;
         background-color: {colores['fondo_principal']};  # Color de fondo del menú
