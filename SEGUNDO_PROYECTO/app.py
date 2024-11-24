@@ -4,9 +4,10 @@ import plotly.express as px
 from streamlit_option_menu import option_menu
 from pag_principal import pagina_principal
 from distribucion_general import distribucion_general
-from colores import colores  # Importar la función para inyectar los estilos
+from colores import colores, inyectar_estilos  # Importar los colores y la función para inyectar los estilos
 
-
+# Inyectar los estilos CSS globalmente
+st.markdown(inyectar_estilos(), unsafe_allow_html=True)
 
 # Cargar el archivo CSV
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
@@ -75,3 +76,4 @@ elif selected == "Análisis por Departamento":
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
