@@ -1,13 +1,13 @@
 import plotly.graph_objects as go
+import streamlit as st
+import json
+import requests
 
 def mostrar_mapa(archivo_cargado):
     # Agrupar por departamento y calcular residuos totales
     residuos_por_departamento = archivo_cargado.groupby('DEPARTAMENTO').sum().reset_index()
 
-    # Cargar el GeoJSON
-    geojson_path ="https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson 
-    with open(geojson_path, 'r', encoding='utf-8') as f:
-    geojson_data = json.load(f)
+    # Cargar el GeoJSON desde la URL
     geojson_url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson"
     geojson_data = requests.get(geojson_url).json()
 
@@ -17,7 +17,7 @@ def mostrar_mapa(archivo_cargado):
         if depto in residuos_por_departamento['DEPARTAMENTO'].values:
             total_residuos = residuos_por_departamento.loc[
                 residuos_por_departamento['DEPARTAMENTO'] == depto, 
-                ['QRESIDUOS_DOM', 'QRESIDUOS_COM', 'QRESIDUOS_INDUSTRIAL']
+                'QRESIDUOS_DOM':'QRESIDUOS_INDUSTRIAL'
             ].sum(axis=1).values[0]
             feature['properties']['total_residuos'] = total_residuos
         else:
@@ -45,5 +45,4 @@ def mostrar_mapa(archivo_cargado):
     )
 
     st.plotly_chart(fig)
-
 
