@@ -1,16 +1,15 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from streamlit_option_menu import option_menu
-from pag_principal import pagina_principal
-from distribucion_general import distribucion_general
-from colores import colores, inyectar_estilos  # Importar los colores y la función para inyectar los estilos
-from mapa import mostrar_mapa  # Importar la función para mostrar el mapa
+from colores import colores, inyectar_estilos  # Importar colores y estilos CSS
+from mapa import mostrar_mapa  # Importar la función mostrar_mapa desde mapa.py
+from distribucion_general import distribucion_general  # Distribución general (si es necesario agregarla)
+from pag_principal import pagina_principal  # Página principal (si es necesario)
 
-# Inyectar los estilos CSS globalmente
+# Inyectar estilos CSS globalmente
 st.markdown(inyectar_estilos(), unsafe_allow_html=True)
 
-# Cargar el archivo CSV
+# Cargar archivo CSV
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
 archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 
@@ -22,7 +21,7 @@ selected = option_menu(
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
-    styles={"container": {"max-width": "300%", "padding": "10px 0"}},  # Hacer el menú más largo para abarcar toda la página
+    styles={"container": {"max-width": "300%", "padding": "10px 0"}},  # Estilo del menú
 )
 
 # Mostrar contenido según la opción seleccionada
@@ -36,9 +35,9 @@ elif selected == "Distribución general":
 
 elif selected == "Mapa":
     st.title("Mapa")
-    st.write("Esta sección muestra un mapa interactivo.")
+    st.write("Esta sección muestra un mapa interactivo de residuos.")
     
-    # Llamar a la función que genera el mapa
+    # Llamar a la función que genera el mapa desde mapa.py
     mostrar_mapa(archivo_cargado)
 
 elif selected == "Resumen":
@@ -56,29 +55,28 @@ elif selected == "Análisis por Departamento":
             archivo_cargado['DEPARTAMENTO'].unique()
         )
     
-    # Filtrado de datos
+    # Filtrar y graficar datos
     datos_filtrados = archivo_cargado[archivo_cargado['DEPARTAMENTO'] == departamento]
     columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
     datos_agrupados = datos_filtrados.groupby('DEPARTAMENTO')[columnas_residuos].sum().reset_index()
 
-    # Usar Plotly para crear el gráfico de barras
+    # Crear gráfico con Plotly
     fig = px.bar(
         datos_agrupados.melt(id_vars='DEPARTAMENTO', var_name='Residuos', value_name='Cantidad'),
         x='Residuos',
         y='Cantidad',
         color='DEPARTAMENTO',
         title=f"Distribución de Residuos por Departamento: {departamento}",
-        color_discrete_sequence=colores['grafico']  # Usar los colores desde el archivo de configuración
+        color_discrete_sequence=colores['grafico']  # Colores desde archivo de configuración
     )
 
     # Configuración del gráfico
     fig.update_layout(
-        title_font=dict(size=24, color=colores['encabezado']),  # Usar la fuente predeterminada
+        title_font=dict(size=24, color=colores['encabezado']),  # Fuente personalizada
         xaxis_title_font=dict(size=18, color=colores['encabezado']),
         yaxis_title_font=dict(size=18, color=colores['encabezado']),
-        font=dict(size=14, color=colores['texto_general'])  # Fuente predeterminada para el cuerpo
+        font=dict(size=14, color=colores['texto_general'])  # Fuente predeterminada
     )
 
     # Mostrar el gráfico
     st.plotly_chart(fig)
-
