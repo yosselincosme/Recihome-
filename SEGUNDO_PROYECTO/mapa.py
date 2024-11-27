@@ -1,11 +1,9 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+import json
 
-def mostrar_mapa(archivo_cargado):
-    """
-    Muestra un mapa interactivo y gráficos relacionados con residuos por región y tipo.
-    """
+def dashboard_residuos(archivo_cargado):
     st.title("Resumen General: Residuos por Región y Tipo")
 
     # Preprocesamiento
@@ -25,16 +23,16 @@ def mostrar_mapa(archivo_cargado):
         max_residuos = residuos_por_region["Total Residuos"].max()
         st.metric(label=f"Mayor Generación: {region_max}", value=f"{max_residuos/1_000_000:.2f} M")
 
-    # Crear fila para el mapa y el gráfico de barras
-    row1_col1, row1_col2 = st.columns([2, 1])  # Columna ancha para el mapa y una más estrecha para el gráfico
+    # 2. Crear una fila para el mapa y el gráfico de barras
+    row1_col1, row1_col2 = st.columns([2, 1])  # Columna ancha para el mapa y una columna más estrecha para el gráfico
 
     with row1_col1:
         st.subheader("Mapa de Generación de Residuos por Departamento")
         mapa_peru = px.choropleth(
             residuos_por_region.reset_index(),
-            geojson="https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/peru-departments.geojson",
-            locations="DEPARTAMENTO",
-            featureidkey="properties.name",
+            geojson="https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/peru-departments.geojson",  # GeoJSON del Perú
+            locations="DEPARTAMENTO",  # Asegúrate de que esta columna coincida con los nombres en el GeoJSON
+            featureidkey="properties.name",  # Asegúrate de que coincidan los nombres de departamentos
             color="Total Residuos",
             color_continuous_scale="Viridis",
             labels={"Total Residuos": "Cantidad de Residuos (kg)"},
@@ -58,7 +56,7 @@ def mostrar_mapa(archivo_cargado):
         )
         st.plotly_chart(top_chart, use_container_width=True)
 
-    # Crear un gráfico circular
+    # 3. Crear una nueva fila para el gráfico circular
     st.subheader("Distribución de Tipos de Residuos")
     residuos_totales_tipos = archivo_cargado[columnas_residuos].sum().reset_index()
     residuos_totales_tipos.columns = ["Tipo de Residuo", "Cantidad"]
