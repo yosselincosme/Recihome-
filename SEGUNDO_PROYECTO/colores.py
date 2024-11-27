@@ -1,15 +1,17 @@
 # colores.py
 
+# colors.py
+
 colores = {
-    'fondo_principal': '#16423C',  # Verde oscuro
-    'fondo_sidebar': '#C4DAD2',    # Verde claro
+    'fondo_principal': '#16423C',  # Fondo de la pantalla principal
+    'fondo_sidebar': '#C4DAD2',    # Fondo del sidebar (menú)
+    'fondo_menu': '#FFFFFF',       # Fondo específico para el menú
     'encabezado': '#FFFFFF',       # Blanco
     'boton': '#6A9C89',            # Verde medio
     'texto_general': '#FFFFFF',    # Blanco
     'grafico': ['#16423C', '#6A9C89', '#C4DAD2', '#E9EFEC']  # Colores para gráficos
 }
 
-# Función para generar el CSS
 def obtener_css():
     return f"""
     <style>
@@ -21,6 +23,11 @@ def obtener_css():
         /* Fondo del sidebar */
         .css-1d391kg {{
             background-color: {colores['fondo_sidebar']} !important;
+        }}
+        
+        /* Fondo específico para el menú */
+        .css-1lcbm7d {{
+            background-color: {colores['fondo_menu']} !important;
         }}
         
         /* Encabezados */
