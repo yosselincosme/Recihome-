@@ -12,17 +12,19 @@ archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
 
 # Crear el menú horizontal
 selected = option_menu(
-    menu_title=None,
-    options=["Página principal", "Distribución general", "Mapa", "Resumen", "Análisis por Departamento"],
-    icons=["house", "bar-chart", "map", "clipboard", "filter"],
-    menu_icon="cast",
-    default_index=0,
-    orientation="horizontal",
+    menu_title="Menú Principal",  # Título del menú
+    options=["Página principal", "Distribución general", "Mapa", "Resumen", "Filtros Avanzados"],  # Nueva opción
+    icons=["house", "bar-chart", "map", "clipboard", "filter"],  # Ícono para la nueva opción
+    menu_icon="cast",  # Ícono general del menú
+    default_index=0,  # Opción predeterminada al cargar
+    orientation="horizontal",  # Menú horizontal
     styles={
             "container": {"padding": "0!important", "background-color": "#fafafa"},
             "icon": {"color": "orange", "font-size": "25px"}, 
             "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
-            "nav-link-selected": {"background-color": "blue"},  # Estilo del menú
+            "nav-link-selected": {"background-color": "blue"},
+        }
+)# Estilo del menú
 
 # Mostrar contenido según la opción seleccionada
 if selected == "Página principal":
