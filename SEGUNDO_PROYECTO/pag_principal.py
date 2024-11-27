@@ -1,11 +1,10 @@
 import pandas as pd
 import streamlit as st
-from colores import inyectar_estilos  
+
 
 # Función para la página principal
 def pagina_principal():
     # Inyectar los estilos CSS personalizados
-    st.markdown(inyectar_estilos(), unsafe_allow_html=True)  # Asegúrate de ejecutar la función
 
     # Título de la aplicación
     st.title("Recihome")
