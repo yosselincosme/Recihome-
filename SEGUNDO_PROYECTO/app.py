@@ -47,7 +47,7 @@ elif selected == "Mapa":
 elif selected == "Resumen":
     st.title("Resumen")
     st.write("Aquí encontrarás un resumen general de la información.")
-    geojson_url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries/PER.geo.json'
+    geojson_url = 'https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/peru_regions.geojson'
     depurar_geojson(geojson_url)
 
 elif selected == "Filtros Avanzados":  # Nueva sección
