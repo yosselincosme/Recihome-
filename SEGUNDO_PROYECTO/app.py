@@ -23,7 +23,6 @@ selected = option_menu(
             "icon": {"color": "orange", "font-size": "25px"}, 
             "nav-link": {"font-size": "25px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},
             "nav-link-selected": {"background-color": "blue"},  # Estilo del menú
-)
 
 # Mostrar contenido según la opción seleccionada
 if selected == "Página principal":
