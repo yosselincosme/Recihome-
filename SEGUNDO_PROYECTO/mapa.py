@@ -1,48 +1,73 @@
-import plotly.graph_objects as go
+import pandas as pd
 import streamlit as st
+import plotly.express as px
 import json
-import requests
 
-def mostrar_mapa(archivo_cargado):
-    # Agrupar por departamento y calcular residuos totales
-    residuos_por_departamento = archivo_cargado.groupby('DEPARTAMENTO').sum().reset_index()
+def dashboard_residuos(archivo_cargado):
+    st.title("Resumen General: Residuos por Región y Tipo")
 
-    # Cargar el GeoJSON desde la URL
-    geojson_url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson"
-    geojson_data = requests.get(geojson_url).json()
+    # Preprocesamiento
+    columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
 
-    # Vincular residuos al GeoJSON
-    for feature in geojson_data['features']:
-        depto = feature['properties']['name']
-        if depto in residuos_por_departamento['DEPARTAMENTO'].values:
-            total_residuos = residuos_por_departamento.loc[
-                residuos_por_departamento['DEPARTAMENTO'] == depto, 
-                'QRESIDUOS_DOM':'QRESIDUOS_INDUSTRIAL'
-            ].sum(axis=1).values[0]
-            feature['properties']['total_residuos'] = total_residuos
-        else:
-            feature['properties']['total_residuos'] = 0
+    # Sumar residuos por departamento
+    residuos_por_region = archivo_cargado.groupby('DEPARTAMENTO')[columnas_residuos].sum()
+    residuos_por_region["Total Residuos"] = residuos_por_region.sum(axis=1)
+    residuos_totales = residuos_por_region["Total Residuos"].sum()
 
-    # Crear el mapa
-    fig = go.Figure(go.Choroplethmapbox(
-        geojson=geojson_data,
-        locations=[f['properties']['name'] for f in geojson_data['features']],
-        z=[f['properties']['total_residuos'] for f in geojson_data['features']],
-        colorscale="Viridis",
-        colorbar_title="Total Residuos",
-        marker_opacity=0.7,
-        marker_line_width=0
-    ))
+    # Crear una fila de dos columnas para las métricas clave
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(label="Residuos Totales Generados", value=f"{residuos_totales/1_000_000:.2f} M")
+    with col2:
+        region_max = residuos_por_region["Total Residuos"].idxmax()
+        max_residuos = residuos_por_region["Total Residuos"].max()
+        st.metric(label=f"Mayor Generación: {region_max}", value=f"{max_residuos/1_000_000:.2f} M")
 
-    # Configurar diseño del mapa
-    fig.update_layout(
-        mapbox=dict(
-            style="carto-positron",
-            center={"lat": -9.19, "lon": -75.0152},
-            zoom=4
-        ),
-        margin={"r": 0, "t": 0, "l": 0, "b": 0}
+    # 2. Crear una fila para el mapa y el gráfico de barras
+    row1_col1, row1_col2 = st.columns([2, 1])  # Columna ancha para el mapa y una columna más estrecha para el gráfico
+
+    with row1_col1:
+        st.subheader("Mapa de Generación de Residuos por Departamento")
+        mapa_peru = px.choropleth(
+            residuos_por_region.reset_index(),
+            geojson="https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/peru-departments.geojson",  # GeoJSON del Perú
+            locations="DEPARTAMENTO",  # Asegúrate de que esta columna coincida con los nombres en el GeoJSON
+            featureidkey="properties.name",  # Asegúrate de que coincidan los nombres de departamentos
+            color="Total Residuos",
+            color_continuous_scale="Viridis",
+            labels={"Total Residuos": "Cantidad de Residuos (kg)"},
+            title="Distribución de Residuos por Departamento"
+        )
+        mapa_peru.update_geos(fitbounds="locations", visible=False)
+        st.plotly_chart(mapa_peru, use_container_width=True)
+
+    with row1_col2:
+        st.subheader("Top Departamentos por Generación de Residuos")
+        top_departamentos = residuos_por_region.nlargest(5, "Total Residuos").reset_index()
+        top_chart = px.bar(
+            top_departamentos,
+            x="Total Residuos",
+            y="DEPARTAMENTO",
+            orientation="h",
+            text="Total Residuos",
+            color="DEPARTAMENTO",
+            labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
+            title="Top 5 Departamentos Generadores de Residuos"
+        )
+        st.plotly_chart(top_chart, use_container_width=True)
+
+    # 3. Crear una nueva fila para el gráfico circular
+    st.subheader("Distribución de Tipos de Residuos")
+    residuos_totales_tipos = archivo_cargado[columnas_residuos].sum().reset_index()
+    residuos_totales_tipos.columns = ["Tipo de Residuo", "Cantidad"]
+    pie_chart = px.pie(
+        residuos_totales_tipos,
+        names="Tipo de Residuo",
+        values="Cantidad",
+        title="Distribución Total de Residuos por Tipo",
+        color_discrete_sequence=px.colors.sequential.Viridis
     )
+    st.plotly_chart(pie_chart, use_container_width=True)
 
-    st.plotly_chart(fig)
-
+    # Nota al pie
+    st.info("Datos basados en el archivo proporcionado. La información puede ser explorada de manera interactiva.")
