@@ -33,3 +33,39 @@ def distribucion_general(archivo_cargado):
     # Mostrar el gráfico en Streamlit
     st.plotly_chart(fig)
 
+def grafico_lineal_por_periodo(archivo_cargado):
+    st.title("Evolución de residuos en el tiempo")
+
+    # Filtrar las columnas de residuos (desde QRESIDUOS_DOM hasta la penúltima columna)
+    columnas_residuos = archivo_cargado.columns[10:-1]
+    
+    # Sumar los residuos por año (PERIODO)
+    residuos_por_anio = archivo_cargado.groupby('PERIODO')[columnas_residuos].sum()
+    
+    # Sumar los valores por fila para obtener los totales por año
+    residuos_por_anio['Total Residuos'] = residuos_por_anio.sum(axis=1)
+    
+    # Resetear índice para que sea compatible con Plotly
+    residuos_por_anio = residuos_por_anio.reset_index()
+    
+    # Crear el gráfico de líneas
+    fig = px.line(
+        residuos_por_anio,
+        x='PERIODO',
+        y='Total Residuos',
+        title="Distribución de Residuos por Año",
+        labels={'PERIODO': 'Año', 'Total Residuos': 'Cantidad de Residuos (kg)'},
+        markers=True
+    )
+
+    # Ajustar los ejes y formato del gráfico
+    fig.update_layout(
+        xaxis=dict(title="Año"),
+        yaxis=dict(title="Cantidad de Residuos (kg)"),
+        title=dict(x=0.5),
+    )
+
+    # Mostrar el gráfico en Streamlit
+    st.plotly_chart(fig)
+
+
