@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-from streamlit_option_menu import option_menu
-from colores import colores, inyectar_estilos  # Importar colores y estilos CSS
+from streamlit_option_menu import option_menu 
 from mapa import mostrar_mapa  # Importar la función mostrar_mapa desde mapa.py
 from distribucion_general import distribucion_general  # Distribución general (si es necesario agregarla)
 from pag_principal import pagina_principal  # Página principal (si es necesario)
