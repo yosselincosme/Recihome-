@@ -7,7 +7,7 @@ from pag_principal import pagina_principal
 from distribucion_general import distribucion_general, grafico_lineal_por_periodo
 from filtros_avanzados import filtros_avanzados
 from mapa import dashboard_residuos
-from resumen import depurar_geojson
+
 
 # Configurar la página
 st.set_page_config(layout="wide")  # Aquí se configura el layout de la página para usar el espacio completo
