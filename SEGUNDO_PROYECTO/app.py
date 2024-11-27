@@ -27,7 +27,7 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important", "background-color": colores['fondo_sidebar']},
+        "container": {"padding": "0!important", "background-color": colores['none']},
         "icon": {"color": colores['boton'], "font-size": "25px"},
         "nav-link": {"font-size": "10px", "text-align": "left", "margin": "0px", "--hover-color": "#eee"},
         "nav-link-selected": {"background-color": "blue"},
