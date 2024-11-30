@@ -5,19 +5,10 @@ from pag_principal import pagina_principal
 from distribucion_general import distribucion_general, grafico_lineal_por_periodo
 from filtros_avanzados import filtros_avanzados
 from mapa import dashboard_residuos
-from colores import obtener_css  # Importar la función para obtener el CSS
+from colores import colores  # Importar el diccionario de colores
 
 # Configurar la página
 st.set_page_config(layout="wide")
-
-# Colores para personalizar estilos
-colores = {
-    'none': '#16423C',  # Fondo del menú
-    'boton': '#FFFFFF'  # Color de los íconos
-}
-
-# Agregar CSS para personalizar la apariencia
-st.markdown(obtener_css(), unsafe_allow_html=True)
 
 # Cargar datos
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
@@ -35,15 +26,15 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "5px", "background-color": colores['none']},
-        "icon": {"color": colores['boton'], "font-size": "20px"},
+        "container": {"padding": "5px", "background-color": colores['fondo_principal']},  # Fondo en RGB
+        "icon": {"color": colores['encabezado'], "font-size": "20px"},  # Colores RGB
         "nav-link": {
             "font-size": "14px",
             "margin": "5px",
             "text-align": "center",
-            "--hover-color": "#ddd"
+            "--hover-color": colores['fondo_sidebar']  # Color de hover en RGB
         },
-        "nav-link-selected": {"background-color": "#FF6347", "font-weight": "bold"},
+        "nav-link-selected": {"background-color": "rgb(255, 99, 71)", "font-weight": "bold"},  # Color de selección
     }
 )
 
@@ -63,9 +54,6 @@ elif selected == "Mapa":
 elif selected == "Resumen":
     st.title("Resumen")
     st.write("Aquí encontrarás un resumen general de la información.")
-    geojson_url = 'https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson'
-    # Asegúrate de que `depurar_geojson` esté implementada correctamente
-    depurar_geojson(geojson_url)
 
 elif selected == "Filtros Avanzados":
     filtros_avanzados(archivo_cargado)
