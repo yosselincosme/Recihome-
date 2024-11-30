@@ -29,7 +29,7 @@ def dashboard_residuos(archivo_cargado):
         st.subheader("Mapa de Generación de Residuos por Departamento")
         mapa_peru = px.choropleth(
             residuos_por_region.reset_index(),
-            geojson="https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/peru-departments.geojson",  # GeoJSON del Perú
+            geojson="https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson",  # GeoJSON del Perú
             locations="DEPARTAMENTO",  # Asegúrate de que esta columna coincida con los nombres en el GeoJSON
             featureidkey="properties.name",  # Asegúrate de que coincidan los nombres de departamentos
             color="Total Residuos",
