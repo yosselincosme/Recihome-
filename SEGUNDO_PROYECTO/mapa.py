@@ -65,11 +65,12 @@ def dashboard_residuos(archivo_cargado):
             locations="DEPARTAMENTO",
             featureidkey="properties.NOMBDEP",  # Aquí se ajusta la clave para los nombres
             color="Total Residuos",
-            color_continuous_scale="Viridis",  # Puedes cambiar esto si deseas otra paleta
+            color_continuous_scale="Blues",  # Escala de azules, el más oscuro tiene más residuos
             labels={"Total Residuos": "Cantidad de Residuos (kg)"},
             title="Distribución de Residuos por Departamento"
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
+        mapa_peru.update_layout(margin={"r":0,"t":0,"l":0,"b":0})  # Eliminar márgenes para una mayor dimensión
         st.plotly_chart(mapa_peru, use_container_width=True)
 
     with row1_col2:
@@ -88,39 +89,4 @@ def dashboard_residuos(archivo_cargado):
         )
         st.plotly_chart(top_chart, use_container_width=True)
 
-    # Colores para la distribución por región natural (gráfico de barras horizontal)
-    colores_regiones = {'COSTA': '#DFF2EB', 'SIERRA': '#B9E5E8', 'SELVA': '#7AB2D3'}
-    
-    # Crear el gráfico de barras horizontal con los colores por región
-    fig_regiones = px.bar(
-        residuos_por_region.reset_index(),
-        x="Total Residuos",
-        y="DEPARTAMENTO",
-        orientation="h",
-        text="Total Residuos",
-        color="DEPARTAMENTO",
-        color_discrete_map=colores_regiones,
-        labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
-        title="Distribución de Residuos por Región Natural"
-    )
-
-    # Personalizar colores de fondo y texto
-    fig_regiones.update_layout(
-        paper_bgcolor='#223D5B',  # Fondo oscuro
-        plot_bgcolor='#223D5B',   # Fondo área de trazado
-        font_color='white',       # Texto blanco
-        xaxis=dict(
-            showgrid=True,
-            gridcolor='white',
-            title=dict(font=dict(color='white')),
-            tickfont=dict(color='white')
-        ),
-        yaxis=dict(
-            showgrid=False,
-            title=dict(font=dict(color='white')),
-            tickfont=dict(color='white')
-        )
-    )
-
-    st.plotly_chart(fig_regiones, use_container_width=True)
 
