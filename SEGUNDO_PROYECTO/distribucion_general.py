@@ -32,8 +32,8 @@ def distribucion_general(archivo_cargado):
 
     # Personalizar el fondo y las líneas del gráfico
     fig.update_layout(
-        paper_bgcolor='rgba(242, 233, 228)',  # Fondo del gráfico
-        plot_bgcolor='rgba(201, 173, 167)',  # Fondo del área de trazado (color crema)
+        paper_bgcolor='rgba(34, 87, 122)',  # Fondo del gráfico
+        plot_bgcolor='rgba(234, 87, 122)',  # Fondo del área de trazado (color crema)
         font_color='white',  # Texto de los títulos y etiquetas en blanco
         xaxis=dict(
             showgrid=True,  # Mostrar las líneas de cuadrícula
@@ -78,8 +78,8 @@ def grafico_lineal_por_periodo(archivo_cargado):
 
     # Ajustar el fondo y las líneas
     fig.update_layout(
-        paper_bgcolor='rgba(201, 173, 167)',  # Fondo del gráfico (color crema)
-        plot_bgcolor='rgba(201, 173, 167)',  # Fondo del área de trazado también crema
+        paper_bgcolor='rgba(34, 87, 122)',  # Fondo del gráfico (color crema)
+        plot_bgcolor='rgba(34, 87, 122)',  # Fondo del área de trazado también crema
         font_color='white',  # Texto en blanco
         xaxis=dict(
             showgrid=True,
