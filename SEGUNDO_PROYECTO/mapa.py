@@ -65,12 +65,15 @@ def dashboard_residuos(archivo_cargado):
             locations="DEPARTAMENTO",
             featureidkey="properties.NOMBDEP",  # Aquí se ajusta la clave para los nombres
             color="Total Residuos",
-            color_continuous_scale="Blues",  # Escala de azules, el más oscuro tiene más residuos
+            color_continuous_scale=["#A2DFF7", "#0072B2"],  # Escala de celeste a azul
             labels={"Total Residuos": "Cantidad de Residuos (kg)"},
             title="Distribución de Residuos por Departamento"
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
-    
+        mapa_peru.update_layout(
+            geo=dict(bgcolor="#A2DFF7"),  # Fondo celeste
+            margin={"r":0,"t":0,"l":0,"b":0}  # Eliminar márgenes para una mayor dimensión
+        )
         st.plotly_chart(mapa_peru, use_container_width=True)
 
     with row1_col2:
