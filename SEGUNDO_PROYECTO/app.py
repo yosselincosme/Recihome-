@@ -29,7 +29,7 @@ except Exception as e:
 # Crear el menú horizontal
 selected = option_menu(
     menu_title="",
-    options=["Página principal", "Distribución general", "Mapa", "Resumen", "Filtros Avanzados"],
+    options=["Página principal", "Distribución general", "Mapa", "Filtros Avanzados"],
     icons=["house", "bar-chart", "map", "clipboard", "filter"],
     menu_icon="cast",
     default_index=0,
