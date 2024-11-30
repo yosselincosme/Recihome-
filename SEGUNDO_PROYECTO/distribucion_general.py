@@ -65,15 +65,19 @@ def grafico_lineal_por_periodo(archivo_cargado):
     
     # Resetear índice para que sea compatible con Plotly
     residuos_por_anio = residuos_por_anio.reset_index()
-    
-    # Crear el gráfico de líneas
-    fig = px.line(
+
+    # Colores para el gráfico de barras
+    colores_barras = ['#640D5F', '#D91656', '#EB5B00', '#FFB200']
+
+    # Crear el gráfico de barras por año
+    fig = px.bar(
         residuos_por_anio,
         x='PERIODO',
         y='Total Residuos',
         title="Distribución de Residuos por Año",
         labels={'PERIODO': 'Año', 'Total Residuos': 'Cantidad de Residuos (kg)'},
-        markers=True
+        color='PERIODO',
+        color_discrete_sequence=colores_barras
     )
 
     # Ajustar el fondo y las líneas con colores en formato hexadecimal
@@ -98,4 +102,45 @@ def grafico_lineal_por_periodo(archivo_cargado):
     # Mostrar el gráfico en Streamlit
     st.plotly_chart(fig)
 
+    # Ahora crear una gráfica del departamento que genera más basura en total
+    residuos_por_departamento = archivo_cargado.groupby('DEPARTAMENTO')[columnas_residuos].sum()
+    residuos_totales_departamento = residuos_por_departamento.sum(axis=1)
+    
+    # Crear un DataFrame con los resultados
+    df_departamento = residuos_totales_departamento.reset_index()
+    df_departamento.columns = ['Departamento', 'Cantidad de Residuos']
 
+    # Encontrar el departamento que genera más residuos
+    departamento_max_residuos = df_departamento.loc[df_departamento['Cantidad de Residuos'].idxmax()]
+
+    # Crear una gráfica de barras del departamento con más residuos
+    fig_departamento = px.bar(
+        df_departamento,
+        x='Departamento',
+        y='Cantidad de Residuos',
+        title=f"Departamento con más residuos: {departamento_max_residuos['Departamento']}",
+        labels={'Cantidad de Residuos': 'Cantidad de Residuos (kg)', 'Departamento': 'Departamento'},
+        color='Departamento'
+    )
+
+    # Personalizar el gráfico con el fondo
+    fig_departamento.update_layout(
+        paper_bgcolor='#223D5B',
+        plot_bgcolor='#223D5B',
+        font_color='white',
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='white',
+            title=dict(font=dict(color='white')),
+            tickfont=dict(color='white')
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='white',
+            title=dict(font=dict(color='white')),
+            tickfont=dict(color='white')
+        )
+    )
+
+    # Mostrar el gráfico en Streamlit
+    st.plotly_chart(fig_departamento)
