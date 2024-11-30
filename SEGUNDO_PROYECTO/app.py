@@ -10,11 +10,22 @@ from colores import colores  # Importar el diccionario de colores
 # Configurar la página
 st.set_page_config(layout="wide")
 
-# Aplicar el fondo principal en toda la aplicación (sin usar CSS)
+# Cargar el archivo de fuente
+font_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/Voltaire-Frangela.ttf"
+
+# Aplicar el fondo principal y la fuente personalizada en toda la aplicación
 st.markdown(f"""
     <style>
+        @font-face {{
+            font-family: 'Voltaire-Frangela';
+            src: url('{font_url}') format('truetype');
+        }}
         .stApp {{
             background-color: {colores['fondo_principal']};
+            font-family: 'Voltaire-Frangela', sans-serif;
+        }}
+        h1, h2, h3, h4, h5, h6 {{
+            font-family: 'Voltaire-Frangela', sans-serif;
         }}
     </style>
     """, unsafe_allow_html=True)
@@ -66,4 +77,5 @@ elif selected == "Resumen":
 
 elif selected == "Filtros Avanzados":
     filtros_avanzados(archivo_cargado)
+
 
