@@ -22,7 +22,7 @@ def dashboard_residuos(archivo_cargado):
         max_residuos = residuos_por_region["Total Residuos"].max()
         st.metric(label=f"Mayor Generación: {region_max}", value=f"{max_residuos/1_000_000:.2f} M")
 
-    # 2. Crear una fila para el mapa y el gráfico de barras
+    # Crear una fila para el mapa y el gráfico de barras
     row1_col1, row1_col2 = st.columns([2, 1])  # Columna ancha para el mapa y una columna más estrecha para el gráfico
 
     with row1_col1:
@@ -68,15 +68,4 @@ def dashboard_residuos(archivo_cargado):
     # Nota al pie
     st.info("Datos basados en el archivo proporcionado. La información puede ser explorada de manera interactiva.")
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    st.title("Análisis de Residuos por Región")
-    
-    # Subida de archivo
-    archivo = st.file_uploader("Sube tu archivo CSV", type="csv")
-    
-    if archivo:
-        # Cargar datos
-        datos = pd.read_csv(archivo)
-        dashboard_residuos(datos)
 
