@@ -71,7 +71,8 @@ def dashboard_residuos(archivo_cargado):
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
         mapa_peru.update_layout(
-            geo=dict(bgcolor="#A2DFF7"),  # Fondo celeste
+            geo=dict(bgcolor="#A2DFF7"),  # Fondo celeste  
+        )
         st.plotly_chart(mapa_peru, use_container_width=True)
 
     with row1_col2:
@@ -89,5 +90,3 @@ def dashboard_residuos(archivo_cargado):
             title="Top 5 Departamentos Generadores de Residuos"
         )
         st.plotly_chart(top_chart, use_container_width=True)
-
-
