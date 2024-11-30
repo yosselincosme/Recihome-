@@ -3,7 +3,7 @@ colores = {
     'fondo_sidebar': 'rgb(196, 218, 210)',  # Fondo del sidebar (menú)
     'fondo_menu': 'rgb(255, 255, 255)',  # Fondo específico para el menú
     'encabezado': 'rgb(255, 255, 255)',  # Blanco
-    'boton': 'rgb(106, 156, 137)',  # Verde medio
+    'boton': 'rgb(0, 109, 119)',  # Verde medio
     'texto_general': 'rgb(255, 255, 255)',  # Blanco
     'grafico': [
         'rgb(22, 66, 60)',
