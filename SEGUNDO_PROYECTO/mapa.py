@@ -40,7 +40,7 @@ def dashboard_residuos(archivo_cargado):
         )
         # Cambiar solo el color de fondo
         mapa_peru.update_layout(
-            paper_bgcolor='rgba(240, 240, 240, 1)',  # Color gris claro para fondo del gráfico
+            paper_bgcolor='rgba(0, 51, 51, 1)',  # Color gris claro para fondo del gráfico
             plot_bgcolor='rgba(240, 240, 240, 1)',  # Igual que el fondo del papel
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
