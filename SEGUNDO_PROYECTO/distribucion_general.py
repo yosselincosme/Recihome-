@@ -15,7 +15,7 @@ def distribucion_general(archivo_cargado):
     df_residuos.columns = ['Región Natural', 'Cantidad de Residuos']
 
     # Configurar los colores por región usando formato hexadecimal
-    colores = {'COSTA': '#4CAF50', 'SIERRA': '#FF6347', 'SELVA': '#FFEB3B'}
+    colores = {'COSTA': '#640D5F', 'SIERRA': '#D91656', 'SELVA': '#EB5B00'}
 
     # Crear el gráfico de barras horizontal
     fig = px.bar(df_residuos,
@@ -83,7 +83,7 @@ def grafico_lineal_por_periodo(archivo_cargado):
     # Ajustar el fondo y las líneas con colores en formato hexadecimal
     fig.update_layout(
         paper_bgcolor='#223D5B',  # Fondo del gráfico (color crema en formato hexadecimal)
-        plot_bgcolor='#223D5B',  # Fondo del área de trazado también en formato hexadecimal
+        plot_bgcolor='#223D5B',  #
         font_color='white',  # Texto en blanco
         xaxis=dict(
             showgrid=True,
