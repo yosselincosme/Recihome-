@@ -72,8 +72,6 @@ def dashboard_residuos(archivo_cargado):
         mapa_peru.update_geos(fitbounds="locations", visible=False)
         mapa_peru.update_layout(
             geo=dict(bgcolor="#A2DFF7"),  # Fondo celeste
-            margin={"r":0,"t":0,"l":0,"b":0}  # Eliminar márgenes para una mayor dimensión
-        )
         st.plotly_chart(mapa_peru, use_container_width=True)
 
     with row1_col2:
