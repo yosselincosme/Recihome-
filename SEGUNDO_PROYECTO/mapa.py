@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import json
 
 def dashboard_residuos(archivo_cargado):
     st.title("Resumen General: Residuos por Región y Tipo")
@@ -38,6 +37,12 @@ def dashboard_residuos(archivo_cargado):
             labels={"Total Residuos": "Cantidad de Residuos (kg)"},
             title="Distribución de Residuos por Departamento"
         )
+        # Ajustar el diseño visual
+        mapa_peru.update_layout(
+            paper_bgcolor='rgba(0, 51, 51, 1)',
+            plot_bgcolor='rgba(0, 51, 51, 1)',
+            font_color='white',
+        )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
         st.plotly_chart(mapa_peru, use_container_width=True)
 
@@ -54,6 +59,14 @@ def dashboard_residuos(archivo_cargado):
             labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
             title="Top 5 Departamentos Generadores de Residuos"
         )
+        # Ajustar el diseño visual
+        top_chart.update_layout(
+            paper_bgcolor='rgba(0, 51, 51, 1)',
+            plot_bgcolor='rgba(0, 51, 51, 1)',
+            font_color='white',
+            xaxis=dict(gridcolor='white', title=dict(color='white'), tickfont=dict(color='white')),
+            yaxis=dict(title=dict(color='white'), tickfont=dict(color='white'))
+        )
         st.plotly_chart(top_chart, use_container_width=True)
 
     # 3. Crear una nueva fila para el gráfico circular
@@ -67,7 +80,10 @@ def dashboard_residuos(archivo_cargado):
         title="Distribución Total de Residuos por Tipo",
         color_discrete_sequence=px.colors.sequential.Viridis
     )
+    # Ajustar el diseño visual
+    pie_chart.update_layout(
+        paper_bgcolor='rgba(0, 51, 51, 1)',
+        font_color='white',
+    )
     st.plotly_chart(pie_chart, use_container_width=True)
 
-    # Nota al pie
-    st.info("Datos basados en el archivo proporcionado. La información puede ser explorada de manera interactiva.")
