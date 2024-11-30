@@ -32,7 +32,7 @@ def distribucion_general(archivo_cargado):
 
     # Personalizar el fondo y las líneas del gráfico
     fig.update_layout(
-        paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
+        paper_bgcolor='rgba(201, 173, 167)',  # Fondo del gráfico
         plot_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del área de trazado
         font_color='white',  # Texto de los títulos y etiquetas en blanco
         xaxis=dict(
