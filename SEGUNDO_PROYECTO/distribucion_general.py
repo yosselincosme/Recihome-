@@ -30,6 +30,24 @@ def distribucion_general(archivo_cargado):
     # Añadir las etiquetas dentro de las barras
     fig.update_traces(text=df_residuos['Cantidad de Residuos'], textposition='inside', textfont_color='black')
 
+    # Personalizar el fondo y las líneas del gráfico
+    fig.update_layout(
+        paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
+        plot_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del área de trazado
+        font_color='white',  # Texto de los títulos y etiquetas en blanco
+        xaxis=dict(
+            showgrid=True,  # Mostrar las líneas de cuadrícula
+            gridcolor='white',  # Color de las líneas de cuadrícula
+            title=dict(font=dict(color='white')),  # Título del eje X
+            tickfont=dict(color='white')  # Color de los valores en el eje X
+        ),
+        yaxis=dict(
+            showgrid=False,  # No mostrar las líneas de cuadrícula en el eje Y
+            title=dict(font=dict(color='white')),  # Título del eje Y
+            tickfont=dict(color='white')  # Color de los valores en el eje Y
+        )
+    )
+
     # Mostrar el gráfico en Streamlit
     st.plotly_chart(fig)
 
@@ -58,14 +76,25 @@ def grafico_lineal_por_periodo(archivo_cargado):
         markers=True
     )
 
-    # Ajustar los ejes y formato del gráfico
+    # Ajustar el fondo y las líneas
     fig.update_layout(
-        xaxis=dict(title="Año"),
-        yaxis=dict(title="Cantidad de Residuos (kg)"),
-        title=dict(x=0.5),
+        paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
+        plot_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del área de trazado
+        font_color='white',  # Texto en blanco
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='white',
+            title=dict(font=dict(color='white')),
+            tickfont=dict(color='white')
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='white',
+            title=dict(font=dict(color='white')),
+            tickfont=dict(color='white')
+        )
     )
 
     # Mostrar el gráfico en Streamlit
     st.plotly_chart(fig)
-
 
