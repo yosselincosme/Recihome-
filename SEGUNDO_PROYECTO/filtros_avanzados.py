@@ -3,7 +3,23 @@ import plotly.express as px
 import pandas as pd
 
 def filtros_avanzados(archivo_cargado):
-    
+    # Validar que el DataFrame no esté vacío
+    if archivo_cargado.empty:
+        st.error("El archivo cargado está vacío. Por favor, carga un archivo válido.")
+        return
+
+    # Verificar que la columna inicial para el rango exista
+    if 'QRESIDUOS_DOM' not in archivo_cargado.columns:
+        st.error("La columna 'QRESIDUOS_DOM' no se encuentra en el archivo cargado.")
+        return
+
+    try:
+        # Seleccionar rango de columnas
+        columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
+    except KeyError as e:
+        st.error(f"Error al seleccionar columnas: {e}")
+        return
+
     # Filtros en el sidebar
     with st.sidebar:
         st.header("Filtros para el análisis avanzado")
@@ -24,7 +40,6 @@ def filtros_avanzados(archivo_cargado):
         
         # Filtro por Tipo de Residuo
         elif filtro_activo == "Por Tipo de Residuo":
-            columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
             tipo_residuo = st.selectbox(
                 "Selecciona un Tipo de Residuo",
                 options=columnas_residuos
@@ -36,7 +51,6 @@ def filtros_avanzados(archivo_cargado):
         datos_filtrados = archivo_cargado[archivo_cargado['DEPARTAMENTO'] == departamento]
         
         # Sumar las columnas de residuos
-        columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
         datos_agrupados = datos_filtrados.groupby('DEPARTAMENTO')[columnas_residuos].sum().reset_index()
         
         # Ordenar residuos por suma total para determinar las columnas más frecuentes
@@ -86,5 +100,18 @@ def filtros_avanzados(archivo_cargado):
     
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    st.title("Análisis Avanzado de Residuos")
+    
+    # Subida de archivo
+    archivo = st.file_uploader("Sube tu archivo CSV", type="csv")
+    
+    if archivo:
+        # Cargar datos
+        datos = pd.read_csv(archivo)
+        filtros_avanzados(datos)
+
 
 
