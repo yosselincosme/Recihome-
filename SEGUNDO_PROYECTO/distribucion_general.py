@@ -78,8 +78,8 @@ def grafico_lineal_por_periodo(archivo_cargado):
 
     # Ajustar el fondo y las líneas con colores en formato hexadecimal
     fig.update_layout(
-        paper_bgcolor='#DFD3C3',  # Fondo del gráfico (color crema en formato hexadecimal)
-        plot_bgcolor='#DFD3C3',  # Fondo del área de trazado también en formato hexadecimal
+        paper_bgcolor='#223D5B',  # Fondo del gráfico (color crema en formato hexadecimal)
+        plot_bgcolor='#223D5B',  # Fondo del área de trazado también en formato hexadecimal
         font_color='white',  # Texto en blanco
         xaxis=dict(
             showgrid=True,
