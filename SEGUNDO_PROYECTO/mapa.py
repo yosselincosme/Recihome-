@@ -33,11 +33,21 @@ def dashboard_residuos(archivo_cargado):
         st.error("No se pudo cargar el archivo GeoJSON desde GitHub.")
         return
 
+    # Validar la estructura del GeoJSON
+    if "features" not in peru_geojson or not isinstance(peru_geojson["features"], list):
+        st.error("El archivo GeoJSON tiene un formato incorrecto.")
+        return
+
     # Verificar que los nombres coincidan entre los datos y el GeoJSON
+    try:
+        nombres_departamentos_geojson = {
+            feature["properties"].get("NOMBDEP", "").upper() for feature in peru_geojson["features"]
+        }
+    except KeyError:
+        st.error("La estructura del archivo GeoJSON no es la esperada.")
+        return
+
     nombres_departamentos_datos = set(residuos_por_region.index.str.upper())
-    nombres_departamentos_geojson = {
-        feature["properties"]["name"].upper() for feature in peru_geojson["features"]
-    }
     coincidencias = nombres_departamentos_datos.intersection(nombres_departamentos_geojson)
     no_coincidencias = nombres_departamentos_datos.difference(nombres_departamentos_geojson)
 
@@ -53,16 +63,11 @@ def dashboard_residuos(archivo_cargado):
             residuos_por_region.reset_index(),
             geojson=peru_geojson,
             locations="DEPARTAMENTO",
-            featureidkey="properties.name",
+            featureidkey="properties.NOMBDEP",  # Aquí se ajusta la clave para los nombres
             color="Total Residuos",
             color_continuous_scale="Viridis",
             labels={"Total Residuos": "Cantidad de Residuos (kg)"},
             title="Distribución de Residuos por Departamento"
-        )
-        # Cambiar el color de fondo
-        mapa_peru.update_layout(
-            paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
-            plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
         st.plotly_chart(mapa_peru, use_container_width=True)
@@ -80,12 +85,4 @@ def dashboard_residuos(archivo_cargado):
             labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
             title="Top 5 Departamentos Generadores de Residuos"
         )
-        # Cambiar el color de fondo
-        top_chart.update_layout(
-            paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
-            plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
-        )
         st.plotly_chart(top_chart, use_container_width=True)
-
-
-
