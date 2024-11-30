@@ -10,6 +10,15 @@ from colores import colores  # Importar el diccionario de colores
 # Configurar la página
 st.set_page_config(layout="wide")
 
+# Aplicar el fondo principal en toda la aplicación (sin usar CSS)
+st.markdown(f"""
+    <style>
+        .stApp {{
+            background-color: {colores['fondo_principal']};
+        }}
+    </style>
+    """, unsafe_allow_html=True)
+
 # Cargar datos
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
 try:
@@ -57,3 +66,4 @@ elif selected == "Resumen":
 
 elif selected == "Filtros Avanzados":
     filtros_avanzados(archivo_cargado)
+
