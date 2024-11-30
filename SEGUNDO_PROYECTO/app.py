@@ -12,7 +12,7 @@ st.set_page_config(layout="wide")
 
 # Colores para personalizar estilos
 colores = {
-    'none': '#024754',  # Fondo del menú
+    'none': '#16423C',  # Fondo del menú
     'boton': '#FFFFFF'  # Color de los íconos
 }
 
