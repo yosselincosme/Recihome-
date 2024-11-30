@@ -78,8 +78,8 @@ def grafico_lineal_por_periodo(archivo_cargado):
 
     # Ajustar el fondo y las líneas
     fig.update_layout(
-        paper_bgcolor='rgba(34, 87, 122)',  # Fondo del gráfico (color crema)
-        plot_bgcolor='rgba(34, 87, 122)',  # Fondo del área de trazado también crema
+        paper_bgcolor='(223, 211, 195)',  # Fondo del gráfico (color crema)
+        plot_bgcolor='rgb(223, 211, 195)',  # Fondo del área de trazado también crema
         font_color='white',  # Texto en blanco
         xaxis=dict(
             showgrid=True,
