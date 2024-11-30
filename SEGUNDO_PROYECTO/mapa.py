@@ -54,9 +54,6 @@ def dashboard_residuos(archivo_cargado):
     if no_coincidencias:
         st.warning(f"Los siguientes departamentos en tus datos no coinciden con el GeoJSON: {', '.join(no_coincidencias)}")
 
-    # Colores para la distribución por región natural (gráfico de barras horizontal)
-    colores_regiones = {'COSTA': '#DFF2EB', 'SIERRA': '#B9E5E8', 'SELVA': '#7AB2D3'}
-
     # Crear una fila para el mapa y el gráfico de barras
     row1_col1, row1_col2 = st.columns([2, 1])  # Columna ancha para el mapa y una columna más estrecha para el gráfico
 
@@ -68,7 +65,7 @@ def dashboard_residuos(archivo_cargado):
             locations="DEPARTAMENTO",
             featureidkey="properties.NOMBDEP",  # Aquí se ajusta la clave para los nombres
             color="Total Residuos",
-            color_continuous_scale="Viridis",
+            color_continuous_scale="Viridis",  # Puedes cambiar esto si deseas otra paleta
             labels={"Total Residuos": "Cantidad de Residuos (kg)"},
             title="Distribución de Residuos por Departamento"
         )
@@ -78,10 +75,6 @@ def dashboard_residuos(archivo_cargado):
     with row1_col2:
         st.subheader("Top Departamentos por Generación de Residuos")
         top_departamentos = residuos_por_region.nlargest(5, "Total Residuos").reset_index()
-        
-        # Colores personalizados para el gráfico de barras del top de departamentos
-        colores_barras = ['#640D5F', '#D91656', '#EB5B00', '#FFB200']
-
         top_chart = px.bar(
             top_departamentos,
             x="Total Residuos",
@@ -89,14 +82,16 @@ def dashboard_residuos(archivo_cargado):
             orientation="h",
             text="Total Residuos",
             color="DEPARTAMENTO",
-            color_discrete_sequence=colores_barras,
+            color_discrete_sequence=["#640D5F", "#D91656", "#EB5B00", "#FFB200"],  # Colores por año
             labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
             title="Top 5 Departamentos Generadores de Residuos"
         )
         st.plotly_chart(top_chart, use_container_width=True)
 
-    # Colores para el gráfico de barras horizontal de la distribución por región
-    residuos_por_region["Total Residuos"] = residuos_por_region.sum(axis=1)
+    # Colores para la distribución por región natural (gráfico de barras horizontal)
+    colores_regiones = {'COSTA': '#DFF2EB', 'SIERRA': '#B9E5E8', 'SELVA': '#7AB2D3'}
+    
+    # Crear el gráfico de barras horizontal con los colores por región
     fig_regiones = px.bar(
         residuos_por_region.reset_index(),
         x="Total Residuos",
