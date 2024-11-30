@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from streamlit_option_menu import option_menu
 from pag_principal import pagina_principal
 from distribucion_general import distribucion_general, grafico_lineal_por_periodo
@@ -11,12 +10,21 @@ from colores import obtener_css  # Importar la función para obtener el CSS
 # Configurar la página
 st.set_page_config(layout="wide")
 
+# Colores para personalizar estilos
+colores = {
+    'none': '#024754',  # Fondo del menú
+    'boton': '#FFFFFF'  # Color de los íconos
+}
+
 # Agregar CSS para personalizar la apariencia
 st.markdown(obtener_css(), unsafe_allow_html=True)
 
 # Cargar datos
 url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/residuos.csv"
-archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
+try:
+    archivo_cargado = pd.read_csv(url, sep=';', encoding='latin1')
+except Exception as e:
+    st.error(f"Error al cargar los datos: {e}")
 
 # Crear el menú horizontal
 selected = option_menu(
@@ -27,10 +35,15 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal",
     styles={
-        "container": {"padding": "0!important", "background-color": colores['none']},
-        "icon": {"color": colores['boton'], "font-size": "25px"},
-        "nav-link": {"font-size": "10px", "text-align": "left", "margin": "0px", "--hover-color": "#eee"},
-        "nav-link-selected": {"background-color": "blue"},
+        "container": {"padding": "5px", "background-color": colores['none']},
+        "icon": {"color": colores['boton'], "font-size": "20px"},
+        "nav-link": {
+            "font-size": "14px",
+            "margin": "5px",
+            "text-align": "center",
+            "--hover-color": "#ddd"
+        },
+        "nav-link-selected": {"background-color": "#FF6347", "font-weight": "bold"},
     }
 )
 
@@ -50,13 +63,9 @@ elif selected == "Mapa":
 elif selected == "Resumen":
     st.title("Resumen")
     st.write("Aquí encontrarás un resumen general de la información.")
-    geojson_url = 'https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/peru_regions.geojson'
+    geojson_url = 'https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson'
+    # Asegúrate de que `depurar_geojson` esté implementada correctamente
     depurar_geojson(geojson_url)
 
 elif selected == "Filtros Avanzados":
     filtros_avanzados(archivo_cargado)
-
-
-
-
-
