@@ -33,7 +33,7 @@ def distribucion_general(archivo_cargado):
     # Personalizar el fondo y las líneas del gráfico
     fig.update_layout(
         paper_bgcolor='rgba(34, 87, 122)',  # Fondo del gráfico
-        plot_bgcolor='rgba(234, 87, 122)',  # Fondo del área de trazado (color crema)
+        plot_bgcolor='rgba(34, 87, 122)',  # Fondo del área de trazado (color crema)
         font_color='white',  # Texto de los títulos y etiquetas en blanco
         xaxis=dict(
             showgrid=True,  # Mostrar las líneas de cuadrícula
