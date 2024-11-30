@@ -15,7 +15,7 @@ def distribucion_general(archivo_cargado):
     df_residuos.columns = ['Región Natural', 'Cantidad de Residuos']
 
     # Configurar los colores por región usando formato hexadecimal
-    colores = {'COSTA': '#640D5F', 'SIERRA': '#D91656', 'SELVA': '#EB5B00'}
+    colores = {'COSTA': '#DFF2EB', 'SIERRA': '#B9E5E8', 'SELVA': '#7AB2D3'}
 
     # Crear el gráfico de barras horizontal
     fig = px.bar(df_residuos,
