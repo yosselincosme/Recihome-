@@ -36,7 +36,7 @@ def filtros_avanzados(archivo_cargado):
         datos_filtrados = archivo_cargado[archivo_cargado['DEPARTAMENTO'] == departamento]
         
         # Sumar las columnas de residuos
-        columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
+        columnas_residuos = archivo_cargado.loc[:, 'RESIDUOS':archivo_cargado.columns[-2]].columns
         datos_agrupados = datos_filtrados.groupby('DEPARTAMENTO')[columnas_residuos].sum().reset_index()
         
         # Ordenar residuos por suma total para determinar las columnas más frecuentes
@@ -75,5 +75,13 @@ def filtros_avanzados(archivo_cargado):
             labels={tipo_residuo: "Cantidad (kg)", "DEPARTAMENTO": "Departamento"},
         )
     
+    # Personalizar el fondo del gráfico
+    fig.update_layout(
+        paper_bgcolor='rgba(0, 51, 51, 1)',  # Color de fondo
+        plot_bgcolor='rgba(255, 255, 255, 1)',  # Fondo del área de trazado
+        font=dict(color='white')  # Color del texto
+    )
+    
     # Mostrar el gráfico
     st.plotly_chart(fig)
+
