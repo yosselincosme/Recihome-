@@ -61,7 +61,7 @@ def dashboard_residuos(archivo_cargado):
         )
         # Cambiar solo el color de fondo
         top_chart.update_layout(
-            paper_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del gráfico
+            paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
             plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
         )
         st.plotly_chart(top_chart, use_container_width=True)
@@ -79,7 +79,7 @@ def dashboard_residuos(archivo_cargado):
     )
     # Cambiar solo el color de fondo
     pie_chart.update_layout(
-        paper_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del gráfico
+        paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
     )
     st.plotly_chart(pie_chart, use_container_width=True)
 
