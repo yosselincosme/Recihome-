@@ -4,7 +4,7 @@ import streamlit as st
 # Función para la página principal
 def pagina_principal():
     # URL del GIF de fondo
-    gif_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/appl.gif"  # URL del GIF
+    gif_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/appl.gif?raw=true"  # URL del GIF
 
     # Título de la aplicación con texto grande
     st.markdown(f"""
