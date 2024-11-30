@@ -22,48 +22,26 @@ def dashboard_residuos(archivo_cargado):
         max_residuos = residuos_por_region["Total Residuos"].max()
         st.metric(label=f"Mayor Generación: {region_max}", value=f"{max_residuos/1_000_000:.2f} M")
 
-    # 2. Crear una fila para el mapa y el gráfico de barras
-    row1_col1, row1_col2 = st.columns([2, 1])  # Columna ancha para el mapa y una columna más estrecha para el gráfico
-
-    with row1_col1:
-        st.subheader("Mapa de Generación de Residuos por Departamento")
-        mapa_peru = px.choropleth(
-            residuos_por_region.reset_index(),
-            geojson="https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/peru-departments.geojson",  # GeoJSON del Perú
-            locations="DEPARTAMENTO",  # Asegúrate de que esta columna coincida con los nombres en el GeoJSON
-            featureidkey="properties.name",  # Asegúrate de que coincidan los nombres de departamentos
-            color="Total Residuos",
-            color_continuous_scale="Viridis",
-            labels={"Total Residuos": "Cantidad de Residuos (kg)"},
-            title="Distribución de Residuos por Departamento"
-        )
-        # Cambiar solo el color de fondo
-        mapa_peru.update_layout(
-            paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
-            plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
-        )
-        mapa_peru.update_geos(fitbounds="locations", visible=False)
-        st.plotly_chart(mapa_peru, use_container_width=True)
-
-    with row1_col2:
-        st.subheader("Top Departamentos por Generación de Residuos")
-        top_departamentos = residuos_por_region.nlargest(5, "Total Residuos").reset_index()
-        top_chart = px.bar(
-            top_departamentos,
-            x="Total Residuos",
-            y="DEPARTAMENTO",
-            orientation="h",
-            text="Total Residuos",
-            color="DEPARTAMENTO",
-            labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
-            title="Top 5 Departamentos Generadores de Residuos"
-        )
-        # Cambiar solo el color de fondo
-        top_chart.update_layout(
-            paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
-            plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
-        )
-        st.plotly_chart(top_chart, use_container_width=True)
+    # Mapa de Generación de Residuos por Departamento
+    st.subheader("Mapa de Generación de Residuos por Departamento")
+    geojson_url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson"
+    mapa_peru = px.choropleth(
+        residuos_por_region.reset_index(),
+        geojson=geojson_url,
+        locations="DEPARTAMENTO",  # Asegúrate de que esta columna coincida con los nombres en el GeoJSON
+        featureidkey="properties.name",  # Asegúrate de que coincidan los nombres de departamentos
+        color="Total Residuos",
+        color_continuous_scale="Viridis",
+        labels={"Total Residuos": "Cantidad de Residuos (kg)"},
+        title="Distribución de Residuos por Departamento"
+    )
+    # Cambiar solo el color de fondo
+    mapa_peru.update_layout(
+        paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
+        plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
+    )
+    mapa_peru.update_geos(fitbounds="locations", visible=False)
+    st.plotly_chart(mapa_peru, use_container_width=True)
 
     # Nota al pie
     st.info("Datos basados en el archivo proporcionado. La información puede ser explorada de manera interactiva.")
