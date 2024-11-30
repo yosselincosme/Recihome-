@@ -43,7 +43,7 @@ selected = option_menu(
             "text-align": "center",
             "--hover-color": colores['fondo_sidebar']  # Color de hover en RGB
         },
-        "nav-link-selected": {"background-color": "rgb(255, 99, 71)", "font-weight": "bold"},  # Color de selección
+        "nav-link-selected": {"background-color": "rgb(154, 140, 152)", "font-weight": "bold"},  # Color de selección
     }
 )
 
