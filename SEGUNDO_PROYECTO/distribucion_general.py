@@ -14,7 +14,7 @@ def distribucion_general(archivo_cargado):
     df_residuos = residuos_totales.reset_index()
     df_residuos.columns = ['Región Natural', 'Cantidad de Residuos']
 
-    # Configurar los colores por región
+    # Configurar los colores por región usando formato hexadecimal
     colores = {'COSTA': '#4CAF50', 'SIERRA': '#FF6347', 'SELVA': '#FFEB3B'}
 
     # Crear el gráfico de barras horizontal
@@ -30,10 +30,10 @@ def distribucion_general(archivo_cargado):
     # Añadir las etiquetas dentro de las barras
     fig.update_traces(text=df_residuos['Cantidad de Residuos'], textposition='inside', textfont_color='black')
 
-    # Personalizar el fondo y las líneas del gráfico
+    # Personalizar el fondo y las líneas del gráfico con colores en formato hexadecimal
     fig.update_layout(
-        paper_bgcolor='rgba(34, 87, 122)',  # Fondo del gráfico
-        plot_bgcolor='rgba(34, 87, 122)',  # Fondo del área de trazado (color crema)
+        paper_bgcolor='#223D5B',  # Fondo del gráfico (color hexadecimal)
+        plot_bgcolor='#223D5B',  # Fondo del área de trazado también en hexadecimal
         font_color='white',  # Texto de los títulos y etiquetas en blanco
         xaxis=dict(
             showgrid=True,  # Mostrar las líneas de cuadrícula
@@ -76,10 +76,10 @@ def grafico_lineal_por_periodo(archivo_cargado):
         markers=True
     )
 
-    # Ajustar el fondo y las líneas
+    # Ajustar el fondo y las líneas con colores en formato hexadecimal
     fig.update_layout(
-        paper_bgcolor='(223, 211, 195)',  # Fondo del gráfico (color crema)
-        plot_bgcolor='rgb(223, 211, 195)',  # Fondo del área de trazado también crema
+        paper_bgcolor='#DFD3C3',  # Fondo del gráfico (color crema en formato hexadecimal)
+        plot_bgcolor='#DFD3C3',  # Fondo del área de trazado también en formato hexadecimal
         font_color='white',  # Texto en blanco
         xaxis=dict(
             showgrid=True,
