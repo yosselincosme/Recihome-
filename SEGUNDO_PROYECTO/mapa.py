@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import json
 
 def dashboard_residuos(archivo_cargado):
     st.title("Resumen General: Residuos por Región y Tipo")
@@ -40,8 +39,8 @@ def dashboard_residuos(archivo_cargado):
         )
         # Cambiar solo el color de fondo
         mapa_peru.update_layout(
-            paper_bgcolor='rgba(0, 51, 51, 1)',  # Color gris claro para fondo del gráfico
-            plot_bgcolor='rgba(240, 240, 240, 1)',  # Igual que el fondo del papel
+            paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
+            plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
         st.plotly_chart(mapa_peru, use_container_width=True)
@@ -66,23 +65,18 @@ def dashboard_residuos(archivo_cargado):
         )
         st.plotly_chart(top_chart, use_container_width=True)
 
-    # 3. Crear una nueva fila para el gráfico circular
-    st.subheader("Distribución de Tipos de Residuos")
-    residuos_totales_tipos = archivo_cargado[columnas_residuos].sum().reset_index()
-    residuos_totales_tipos.columns = ["Tipo de Residuo", "Cantidad"]
-    pie_chart = px.pie(
-        residuos_totales_tipos,
-        names="Tipo de Residuo",
-        values="Cantidad",
-        title="Distribución Total de Residuos por Tipo",
-        color_discrete_sequence=px.colors.sequential.Viridis
-    )
-    # Cambiar solo el color de fondo
-    pie_chart.update_layout(
-        paper_bgcolor='rgba(0, 51, 51, 1)',  # Fondo del gráfico
-    )
-    st.plotly_chart(pie_chart, use_container_width=True)
-
     # Nota al pie
     st.info("Datos basados en el archivo proporcionado. La información puede ser explorada de manera interactiva.")
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    st.title("Análisis de Residuos por Región")
+    
+    # Subida de archivo
+    archivo = st.file_uploader("Sube tu archivo CSV", type="csv")
+    
+    if archivo:
+        # Cargar datos
+        datos = pd.read_csv(archivo)
+        dashboard_residuos(datos)
 
