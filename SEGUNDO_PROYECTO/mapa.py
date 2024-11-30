@@ -23,14 +23,14 @@ def dashboard_residuos(archivo_cargado):
         max_residuos = residuos_por_region["Total Residuos"].max()
         st.metric(label=f"Mayor Generación: {region_max}", value=f"{max_residuos/1_000_000:.2f} M")
 
-    # Verificar acceso al GeoJSON
+    # Descargar GeoJSON desde GitHub
     geojson_url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson"
     geojson_response = requests.get(geojson_url)
 
     if geojson_response.status_code == 200:
         peru_geojson = geojson_response.json()
     else:
-        st.error("No se pudo cargar el archivo GeoJSON para el mapa.")
+        st.error("No se pudo cargar el archivo GeoJSON desde GitHub.")
         return
 
     # Verificar que los nombres coincidan entre los datos y el GeoJSON
@@ -86,4 +86,6 @@ def dashboard_residuos(archivo_cargado):
             plot_bgcolor='rgba(240, 240, 240, 1)',  # Fondo del área de trazado
         )
         st.plotly_chart(top_chart, use_container_width=True)
+
+
 
