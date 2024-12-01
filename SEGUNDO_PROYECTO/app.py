@@ -52,7 +52,7 @@ selected = option_menu(
             "--hover-color": colores['fondo_sidebar']  # Color de hover en RGB
         },
         "nav-link-selected": {
-            "background-color": "rgb(154, 140, 152)",  # Fondo al seleccionar
+            "background-color": "#00FF9C",  # Fondo al seleccionar
             "font-weight": "bold",
             "color": "white",  # Asegurar que las palabras seleccionadas también sean blancas
         },
