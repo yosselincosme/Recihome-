@@ -43,14 +43,19 @@ selected = option_menu(
     orientation="horizontal",
     styles={
         "container": {"padding": "5px", "background-color": colores['fondo_principal']},  # Fondo en RGB
-        "icon": {"color": colores['encabezado'], "font-size": "20px"},  # Colores RGB
+        "icon": {"color": colores['encabezado'], "font-size": "20px"},  # Iconos de colores RGB
         "nav-link": {
             "font-size": "14px",
             "margin": "5px",
             "text-align": "center",
+            "color": "white",  # Cambiar color de las palabras a blanco
             "--hover-color": colores['fondo_sidebar']  # Color de hover en RGB
         },
-        "nav-link-selected": {"background-color": "rgb(154, 140, 152)", "font-weight": "bold"},  # Color de selección
+        "nav-link-selected": {
+            "background-color": "rgb(154, 140, 152)",  # Fondo al seleccionar
+            "font-weight": "bold",
+            "color": "white",  # Asegurar que las palabras seleccionadas también sean blancas
+        },
     }
 )
 
