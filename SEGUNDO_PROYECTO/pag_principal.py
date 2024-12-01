@@ -1,5 +1,8 @@
 import streamlit as st
 
+# Configuración de la página
+st.set_page_config(layout="wide", page_title="Recihome", page_icon="🌍")
+
 # Función para la página principal
 def pagina_principal():
     # URL del GIF de fondo
