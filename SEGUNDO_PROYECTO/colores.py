@@ -1,5 +1,5 @@
 colores = {
-    'fondo_principal': '#000000',  
+    'fondo_principal': '#0B192C',  
     'fondo_sidebar': '#22223B',  #
     'fondo_menu': '#343A40',  # 
     'encabezado': '#343A40',  # 
