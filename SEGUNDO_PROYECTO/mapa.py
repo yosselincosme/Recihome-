@@ -4,18 +4,21 @@ import plotly.express as px
 import requests
 
 def dashboard_residuos(archivo_cargado):
-    # Cambiar el color del texto de Streamlit a blanco
+    # Cambiar el color del texto de Streamlit a blanco, incluyendo st.metric
     st.markdown(
         """
         <style>
             .stApp {
-                color: white;  /* Cambia el color del texto a blanco */
+                color: white;  /* Cambiar color general del texto a blanco */
             }
             div[data-testid="stMetricValue"] {
-                color: white; /* Cambia el color de los valores de las métricas */
+                color: white; /* Cambiar color del valor en st.metric */
+                font-size: 24px; /* Tamaño opcional para el valor */
+                font-weight: bold; /* Opcional: negrita para el valor */
             }
             div[data-testid="stMetricLabel"] {
-                color: white; /* Cambia el color de las etiquetas de las métricas */
+                color: white; /* Cambiar color de la etiqueta en st.metric */
+                font-size: 18px; /* Tamaño opcional para la etiqueta */
             }
         </style>
         """,
@@ -40,7 +43,6 @@ def dashboard_residuos(archivo_cargado):
         region_max = residuos_por_region["Total Residuos"].idxmax()
         max_residuos = residuos_por_region["Total Residuos"].max()
         st.metric(label=f"Mayor Generación: {region_max}", value=f"{max_residuos/1_000_000:.2f} M")
-
     # Descargar GeoJSON desde GitHub
     geojson_url = "https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/peru_regions.geojson"
     geojson_response = requests.get(geojson_url)
