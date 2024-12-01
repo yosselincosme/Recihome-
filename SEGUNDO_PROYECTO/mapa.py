@@ -4,7 +4,25 @@ import plotly.express as px
 import requests
 
 def dashboard_residuos(archivo_cargado):
- 
+     st.markdown(
+        """
+        <style>
+            .stApp {
+                color: white;  /* Cambia el color del texto a blanco */
+            }
+            div[data-testid="stMetricValue"] {
+                color: white; /* Cambia el color de los valores de las métricas */
+            }
+            div[data-testid="stMetricLabel"] {
+                color: white; /* Cambia el color de las etiquetas de las métricas */
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.title("Resumen General: Residuos por Región y Tipo")
+
     # Preprocesamiento
     columnas_residuos = archivo_cargado.loc[:, 'QRESIDUOS_DOM':archivo_cargado.columns[-2]].columns
 
