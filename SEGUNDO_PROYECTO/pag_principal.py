@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Configuración de la página (debe ser la primera llamada a Streamlit)
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")  # Asegúrate de que esta sea la primera instrucción de Streamlit
 
 # Función para la página principal
 def pagina_principal():
@@ -68,4 +68,5 @@ def pagina_principal():
 
 # Llamar a la función principal
 pagina_principal()
+
 
