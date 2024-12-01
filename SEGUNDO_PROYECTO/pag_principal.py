@@ -1,13 +1,15 @@
-import pandas as pd
 import streamlit as st
+
+# Configuración de la página (debe ser la primera llamada a Streamlit)
+st.set_page_config(layout="wide")
 
 # Función para la página principal
 def pagina_principal():
     # URL del GIF de fondo
-    gif_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/appl.gif?raw=true"  # URL del GIF
+    gif_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/appl.gif?raw=true"
 
     # URL del logo
-    logo_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/logo.png?raw=true"  # URL del logo
+    logo_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/logo.png?raw=true"
 
     # Variable de estado para mostrar los nombres
     if "mostrar_nombres" not in st.session_state:
@@ -44,7 +46,7 @@ def pagina_principal():
             Usa el menú de la izquierda para navegar entre páginas.
         </p>
     """, unsafe_allow_html=True)
-    
+
     # Botón para mostrar nombres
     if st.button("Mostrar nombres"):
         st.session_state.mostrar_nombres = True
@@ -56,7 +58,7 @@ def pagina_principal():
                 <p style="font-size: 18px; font-weight: bold;">Yosselin, Patricia, Justin y Andrea</p>
             </div>
         """, unsafe_allow_html=True)
-    
+
     # Imagen en la esquina inferior derecha
     st.markdown("""
         <div style="position: fixed; bottom: 10px; right: 10px; z-index: 999;">
