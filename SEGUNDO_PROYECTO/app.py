@@ -10,11 +10,18 @@ from colores import colores  # Importar el diccionario de colores
 # Configurar la página
 st.set_page_config(layout="wide")
 
-# Aplicar el fondo principal en toda la aplicación (sin usar CSS)
+# Aplicar el fondo principal y cambiar el color de las palabras a blanco
 st.markdown(f"""
     <style>
         .stApp {{
             background-color: {colores['fondo_principal']};
+            color: white;  /* Color blanco para el texto */
+        }}
+        .css-1d391kg, .css-1v3fvcr {{  /* Selector CSS para los textos */
+            color: white !important;  /* Forzar el color blanco */
+        }}
+        .css-16huue1 a {{
+            color: white !important;  /* Color blanco para enlaces */
         }}
     </style>
     """, unsafe_allow_html=True)
