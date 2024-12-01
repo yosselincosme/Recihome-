@@ -6,7 +6,10 @@ def pagina_principal():
     # URL del GIF de fondo
     gif_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/appl.gif?raw=true"  # URL del GIF
 
-    # Título de la aplicación con texto grande
+    # URL del logo
+    logo_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/logo.png?raw=true"  # URL del logo
+
+    # Diseño de la página
     st.markdown(f"""
         <style>
             .stApp {{
@@ -17,10 +20,11 @@ def pagina_principal():
                 height: 100vh;
                 color: white;  /* Cambia el color de texto para hacerlo visible sobre el GIF */
             }}
-            h1 {{
-                font-size: 50px;
-                text-align: center;
-                font-family: 'Arial', sans-serif;
+            .logo-container {{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 80vh;  /* Ajustar la altura para centrar verticalmente */
             }}
             p {{
                 font-size: 20px;
@@ -28,11 +32,9 @@ def pagina_principal():
                 font-family: 'Arial', sans-serif;
             }}
         </style>
-        <h1>Recihome</h1>
-        <p>
-            Una app centrada en la visualización, recolección y reciclaje de residuos en el hogar, 
-            permitiendo monitorear en tiempo real los residuos generados por los hogares en todo el Perú mediante gráficos y promedios de cada vivienda.
-        </p>
+        <div class="logo-container">
+            <img src="{logo_url}" alt="Logo" style="max-width: 300px; height: auto;">
+        </div>
         <p style="font-size: 18px; text-align: center;">
             Usa el menú de la izquierda para navegar entre páginas.
         </p>
