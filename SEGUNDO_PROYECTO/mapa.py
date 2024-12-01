@@ -4,6 +4,17 @@ import plotly.express as px
 import requests
 
 def dashboard_residuos(archivo_cargado):
+    st.markdown(
+        """
+        <style>
+            .stApp {
+                color: white;  /* Cambia el color del texto a blanco */
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.title("Resumen General: Residuos por Región y Tipo")
 
     # Preprocesamiento
@@ -71,7 +82,10 @@ def dashboard_residuos(archivo_cargado):
         )
         mapa_peru.update_geos(fitbounds="locations", visible=False)
         mapa_peru.update_layout(
-            geo=dict(bgcolor="#A2DFF7"),  # Fondo celeste  
+            geo=dict(bgcolor="black"),  # Fondo negro
+            paper_bgcolor="black",  # Fondo del gráfico negro
+            plot_bgcolor="black",  # Fondo del gráfico negro
+            font=dict(color="white")  # Texto blanco
         )
         st.plotly_chart(mapa_peru, use_container_width=True)
 
@@ -85,8 +99,14 @@ def dashboard_residuos(archivo_cargado):
             orientation="h",
             text="Total Residuos",
             color="DEPARTAMENTO",
-            color_discrete_sequence=["#640D5F", "#D91656", "#EB5B00", "#FFB200"],  # Colores por año
+            color_discrete_sequence=["#640D5F", "#D91656", "#EB5B00", "#FFB200"],  # Colores personalizados
             labels={"Total Residuos": "Cantidad de Residuos (kg)", "DEPARTAMENTO": "Departamento"},
             title="Top 5 Departamentos Generadores de Residuos"
         )
+        top_chart.update_layout(
+            paper_bgcolor="black",  # Fondo negro
+            plot_bgcolor="black",  # Fondo negro
+            font=dict(color="white")  # Texto blanco
+        )
         st.plotly_chart(top_chart, use_container_width=True)
+
