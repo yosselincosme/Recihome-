@@ -11,7 +11,7 @@ def pagina_principal():
     # URL del logo
     logo_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/logo.png?raw=true"
 
-    # Variable de estado para mostrar los nombres
+    # Variable de estado para mostrar/ocultar nombres
     if "mostrar_nombres" not in st.session_state:
         st.session_state.mostrar_nombres = False
 
@@ -47,11 +47,11 @@ def pagina_principal():
         </p>
     """, unsafe_allow_html=True)
 
-    # Botón para mostrar nombres
-    if st.button("Mostrar nombres"):
-        st.session_state.mostrar_nombres = True
+    # Botón para alternar mostrar/ocultar nombres
+    if st.button("Mostrar/Ocultar nombres"):
+        st.session_state.mostrar_nombres = not st.session_state.mostrar_nombres
 
-    # Mostrar nombres si el botón ha sido pulsado
+    # Mostrar u ocultar nombres según el estado
     if st.session_state.mostrar_nombres:
         st.markdown("""
             <div style="text-align: center; margin-top: 20px;">
