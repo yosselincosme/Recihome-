@@ -37,7 +37,7 @@ except Exception as e:
 selected = option_menu(
     menu_title="",
     options=["Página principal","Resumen", "Distribución general", "Mapa", "Filtros Avanzados"],
-    icons=["house", "clipboard", "map", "bar-chart", "filter"],
+    icons=["house", "clipboard", "bar-chart", "map", "filter"],
     menu_icon="cast",
     default_index=0,
     orientation="horizontal",
