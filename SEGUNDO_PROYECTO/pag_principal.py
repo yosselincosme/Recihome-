@@ -9,6 +9,10 @@ def pagina_principal():
     # URL del logo
     logo_url = "https://github.com/Sawamurarebatta/Recihome-/blob/main/SEGUNDO_PROYECTO/logo.png?raw=true"  # URL del logo
 
+    # Variable de estado para mostrar los nombres
+    if "mostrar_nombres" not in st.session_state:
+        st.session_state.mostrar_nombres = False
+
     # Diseño de la página
     st.markdown(f"""
         <style>
@@ -22,6 +26,7 @@ def pagina_principal():
             }}
             .logo-container {{
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 height: 80vh;  /* Ajustar la altura para centrar verticalmente */
@@ -40,9 +45,25 @@ def pagina_principal():
         </p>
     """, unsafe_allow_html=True)
     
+    # Botón para mostrar nombres
+    if st.button("Mostrar nombres"):
+        st.session_state.mostrar_nombres = True
+
+    # Mostrar nombres si el botón ha sido pulsado
+    if st.session_state.mostrar_nombres:
+        st.markdown("""
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 18px; font-weight: bold;">Yosselin, Patricia, Justin y Andrea</p>
+            </div>
+        """, unsafe_allow_html=True)
+    
     # Imagen en la esquina inferior derecha
     st.markdown("""
         <div style="position: fixed; bottom: 10px; right: 10px; z-index: 999;">
             <img src="https://raw.githubusercontent.com/Sawamurarebatta/Recihome-/main/SEGUNDO_PROYECTO/planeta.png" width="150">
         </div>
     """, unsafe_allow_html=True)
+
+# Llamar a la función principal
+pagina_principal()
+
