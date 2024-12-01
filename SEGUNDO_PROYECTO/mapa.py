@@ -4,7 +4,8 @@ import plotly.express as px
 import requests
 
 def dashboard_residuos(archivo_cargado):
-     st.markdown(
+    # Cambiar el color del texto de Streamlit a blanco
+    st.markdown(
         """
         <style>
             .stApp {
@@ -116,5 +117,3 @@ def dashboard_residuos(archivo_cargado):
         )
         top_chart.update_traces(textfont=dict(color="white"))  # Texto interno blanco
         st.plotly_chart(top_chart, use_container_width=True)
-
-
